@@ -1,1 +1,3 @@
 # R_graphViz
+DOT言語で作成したフローチャートをsvgやpdfに出力するRのscript
+英語だと見つかるけど、日本語だと中途半端なのでGitHubにさらす
