@@ -1,0 +1,77 @@
+digraph PRISMA_flowchart {
+  
+  # general Settings
+  graph [
+    newrank = true, 
+    ranksep = "0.4", 
+    nodesep = "0.4", 
+    splines = ortho]; 
+
+  node [
+    shape = rectangle, 
+    style = "filled, rounded", 
+    fillcolor = gray95, 
+    fontsize = 10, 
+    width = 2.2];
+    
+  edge [
+    penwidth = 2, 
+    arrowsize = 0.7];
+  
+  # node relationships between clusters
+  {rank = same; c2_1; c3_1;};
+  {rank = same; c2_2; c3_2;};
+  {rank = same; c2_3; c3_3;};
+  {rank = same; c2_4};
+  {rank = same; c2_5; c3_5;};
+  {rank = same; c2_6};
+  {rank = same; c2_7; c3_6;};
+  
+  
+  # edges between clusters
+  c2_1 -> c3_1 [label = "できる"];
+  c2_2 -> c3_2 [label = "できる"];
+  c2_3 -> c3_3 [label = "できる"];
+  c2_5 -> c3_5 [label = "所見なし"];
+  
+ 
+ 
+  subgraph cluster_B {
+    label = "作成CD読み取りチェックフローチャート"; 
+    fontsize = 12;
+    
+    subgraph column_3 { 
+      label= "";
+      
+      c3_1 [label = "終了"];
+      c3_2 [label = "PC固有の問題"]; 
+      c3_3 [label = "PC付属ドライブの不良"]; 
+      c3_5 [label = "機器不良"];
+      c3_6 [label = "メーカーへ連絡"];
+      # edges
+      c3_5 -> c3_6 
+    } 
+    
+    subgraph column_2 { 
+      label = "";
+      
+      c2_1 [label = "CDが読み取れるか"]
+      c2_2 [label = "他のPCで読み取れるか"]; 
+      c2_3 [label = "ポータブルCDドライブで\l読み取れるか"]; 
+      c2_4 [label = "メディアの不良"]; 
+      c2_5 [label = "メディア不良のR/O"];
+      c2_6 [label = "メディアの読み取り面チェック"];
+      c2_7 [label = "再度作成"];
+      # edges
+      c2_1 -> c2_2[label = "できない"];  
+      c2_2 -> c2_3[label = "できない"]; 
+      c2_3 -> c2_4[label = "できない"];
+      c2_4 -> c2_5[label = "第一選択"];
+      c2_5 -> c2_6;
+      c2_6 -> c2_7[label = "所見あり"];
+      }
+  }
+  
+    }
+  }
+}
